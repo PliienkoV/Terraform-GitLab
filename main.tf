@@ -1,4 +1,5 @@
+#Configure the GitLab Provider
 provider "gitab" {
-    base_url = var.url
-    token = var.gitlab_token
+  base_url = var.gitlab_url
+  token    = var.gitlab_token
 }
