@@ -8,5 +8,15 @@ variable "gitlab_url" {
 variable "gitlab_token" {
   description = "GitLab Token"
   type        = string
-  default     = "5bZuyii9_2FTqeZRJbUB"
+  sensitive   = true
+  default     = "yzek28ojZj1nCmUn5_mj"
+}
+
+variable "project_name" {
+  description = "Onboard project name"
+  type        = string
+  validation {
+    condition = lower(var.project_name) == var.project_name
+    error_message = "Validation condition of the project name. Must be lowercase"
+  }
 }
