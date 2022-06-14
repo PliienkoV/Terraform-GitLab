@@ -1,4 +1,4 @@
-output "name" {
+output "group_url" {
   description = "Main group URL"
-  value       = gitlab_group.wa_basic_group.web_url
+  value       = module.gitlab_groups.web_urls
 }

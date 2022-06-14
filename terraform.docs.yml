@@ -1,0 +1,16 @@
+formatter: "markdown table"
+settings:
+  anchor: false
+  lockfile: true
+  sensitive: true
+  hide-empty: true
+  html: false
+sort:
+  enabled: true
+  by: name
+recursive:
+  enabled: true
+  path: modules
+output: 
+  file: README.md
+  mode: inject

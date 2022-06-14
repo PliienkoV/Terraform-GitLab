@@ -1,38 +1,24 @@
-#Configure the GitLab Provider
+# Backend config
+
+# terraform {
+#   backend "s3" {
+#     bucket         = "wa-223005-pvo"
+#     key            = "states/wa/220530.tfstate"
+#     region         = "us-east-1"
+#     dynamodb_table = "terraform-state-lock"
+#     profile = "PVO"
+#   }
+# }
+
+# Configure the GitLab Provider
 provider "gitlab" {
   base_url = var.gitlab_url
   token    = var.gitlab_token
   insecure = true
 }
 
-# By group's full path
-data "gitlab_group" "wa_main_group" {
-    group_id = 5
-}
-# Locals
-locals {
-  name = "wa-${var.project_name}"
-}
-
-# Resources
-resource "gitlab_group" "wa_basic_group" {
-  name        = local.name
-  path        = local.name
-  description = "${local.name} group"
-  lifecycle {
-    precondition {
-        condition = data.gitlab_group.wa_main_group.description == "Parent"
-        error_message = "This group cant create additional projects"
-    }
-  }
-}
-
-# Create a project in the wa_basic_group
-resource "gitlab_project" "wa_basic_project" {
-  name         = "Project ${local.name}"
-  description  = var.project_name
-  namespace_id = gitlab_group.wa_basic_group.id
-  depends_on = [
-    gitlab_group.wa_basic_group
-  ]
+#
+module "gitlab_groups" {
+  source        = "./modules/gitlab_groups"
+  project_names = var.project_names
 }
