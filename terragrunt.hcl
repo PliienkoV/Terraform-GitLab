@@ -14,3 +14,17 @@ remote_state {
     profile = "PVO"
   }
 }
+
+# Provider config
+
+generate "provider" {
+    path = "provider.tf"
+    if_exists = "overwrite_terragrunt"
+    contents = <<EOF
+provider "gitlab" {
+    base_url = var.gitlab_url
+    token    = var.gitlab_token
+    insecure = true
+  }
+EOF
+}

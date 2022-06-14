@@ -11,11 +11,11 @@
 # }
 
 # Configure the GitLab Provider
-provider "gitlab" {
-  base_url = var.gitlab_url
-  token    = var.gitlab_token
-  insecure = true
-}
+# provider "gitlab" {
+#   base_url = var.gitlab_url
+#   token    = var.gitlab_token
+#   insecure = true
+# }
 
 #
 module "gitlab_groups" {
